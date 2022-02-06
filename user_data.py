@@ -18,3 +18,4 @@ class User(db.Model):
             'username': self.username,
             'password': self.password,
         }
+        
