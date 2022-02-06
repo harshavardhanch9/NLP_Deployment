@@ -5,6 +5,7 @@ from flask_restful import Resource, Api, reqparse
 from wtform import RegistrationForm
 from wtform import * 
 from user_data import *
+#from passlib.hash import pbkdf2_sha256
 
 import spacy
 from spacytextblob.spacytextblob import SpacyTextBlob
@@ -29,6 +30,8 @@ def register():
     if reg_form.validate_on_submit():
         username = reg_form.username.data
         password = reg_form.password.data
+
+        #hashed_password = pbkdf2_sha256.hash(password)
 
         user = User(username=username, password=password)
         db.session.add(user)
