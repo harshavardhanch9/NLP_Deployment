@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 import sqlalchemy
 from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Resource, Api, reqparse
@@ -24,22 +24,29 @@ db.create_all(app=app) ## create table
 db = SQLAlchemy(app)
 
 @app.route('/', methods=['GET', 'POST'])
-def Sentiment():
+def register():
     reg_form = RegistrationForm()
     if reg_form.validate_on_submit():
         username = reg_form.username.data
         password = reg_form.password.data
 
-        user_object = User.query.filter_by(username=username).first()
-        if user_object:
-            return "Username has already taken by someone!"
-
         user = User(username=username, password=password)
         db.session.add(user)
         db.session.commit()
-        return "Successfully entered into DB!"
+        return redirect(url_for('login'))
 
     return render_template('home.html', form=reg_form)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    login_form = LoginForm()
+
+    if login_form.validate_on_submit():
+        return "Logged in"
+
+    return render_template("login.html", form=login_form)
+
 
 @app.route('/stocks')
 def Stocks():
