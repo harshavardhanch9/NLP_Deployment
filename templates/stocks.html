@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Stocks Page{% endblock %}
+
+{% block content %}
+
+  <div class="fluid-container">
+    <h1 class="text-center">Stocks tweet sentiment analysis</h1>
+
+    <form class="p-3 text-center" action="/hello", method="post" enctype="multipart/form-data" >
+        <input class="form-control" type="text", value="Copy tweet here" name="typetext">
+        <input class="btn btn-primary mt-3" type="submit", value="Predict Tweet">
+    </form>
+    {% if prediction %}
+    <p class="text-center"> News is {{prediction}}</p>
+    {% endif %} 
+  </div>
+    <a href="/">go to home page</a>
+{% endblock %}

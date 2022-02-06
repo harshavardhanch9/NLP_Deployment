@@ -1,0 +1,40 @@
+{% from 'components/form_helper.html' import displayField %}
+{% extends "base.html" %}
+{% from "components/card.html" import card %}
+
+{% block title %}Home Page{% endblock %}
+
+
+
+{% block content %}
+  <!-- <section class="recent-blog-area section-gap"> -->
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+      
+            <!-- login form outer design -->
+            <!-- <div class="container"> -->
+            <div class="col-md-9 col-lg-6 col-xl-5">
+              <h1 class="text-center">Sentiment analysis for financial news</h1>
+                <img src="https://www.lehnerinvestments.com/wp-content/uploads/2021/10/Market_Sentiment-780x438.jpg" class="img-fluid"
+                  alt="Market sentiment">
+              </div>
+              <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <h3>Register</h3>
+                <form action="{{ url_for('Sentiment')}}", method="POST">
+                  {{ displayField(form.username, 'Username', autocomplete="off", autofocus=true) }}
+                  {{ displayField(form.password, 'Password') }}
+                  {{ displayField(form.confirm_pswd, 'Retype Password') }}
+                  <div>
+                    {{ form.submit_button }}
+                  </div>
+                  {{ form.csrf_token }}
+              </form>
+              </div>
+            </div>
+          </div>        
+    </div>
+    </div>
+  <!-- </section> -->
+{% endblock %}
+
+
